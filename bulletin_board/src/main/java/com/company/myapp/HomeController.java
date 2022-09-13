@@ -44,8 +44,27 @@ public class HomeController {
 			logger.info(list.get(i).getUser_name());
 			model.addAttribute("USER_ID", list.get(0).getUser_id() );
 		}
-		
 		return "home";
 	}
-	
+	@RequestMapping(value = "./login.html", method = RequestMethod.GET)
+	public String login(Locale locale, Model model) {
+		logger.info("Welcome home! The client locale is {}.", locale);
+		
+		Date date = new Date();
+		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+		
+		String formattedDate = dateFormat.format(date);
+		
+		model.addAttribute("serverTime", formattedDate );
+		
+		List<HomeDto> list = homeDao.sel();
+
+		for(int i=0; i<list.size(); i++){
+			logger.info(list.get(i).getUser_id());
+			logger.info(list.get(i).getUser_pw());
+			logger.info(list.get(i).getUser_name());
+			model.addAttribute("USER_ID", list.get(0).getUser_id() );
+		}
+		return "login";
+	}
 }
