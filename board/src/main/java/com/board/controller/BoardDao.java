@@ -17,4 +17,8 @@ public class BoardDao {
 	public List<BoardDto> list(){
 		return sqlSession.selectList("sql.list");
 	}
+	public void write(BoardDto vo) throws Exception{
+		sqlSession.insert("sql.write", vo);
+
+	}
 }

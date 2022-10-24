@@ -16,7 +16,10 @@
 <P> board_title is ${board_title}</P>
 <P> board_content is ${board_content}</P>
 <P> board_writer is ${board_writer}</P>
-<p><a href="/board/list">게시물 목록</a></p>
+<p>
+<a href="/board/list">게시물 목록</a><br>
+<a href="/board/write">게시물 작성</a>
+</p>
 
 </body>
 </html>
