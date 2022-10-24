@@ -10,18 +10,26 @@
 </head>
 <body>
 	<table>
- <thead>
-  <tr>
-   <th>번호</th>
-   <th>제목</th>
-   <th>작성일</th>
-   <th>작성자</th>
-   <th>조회수</th>
-  </tr>
- </thead>
+	<thead>
+		<tr>
+			<th>번호</th>
+			<th>제목</th>
+			<th>작성일</th>
+			<th>작성자</th>
+			<th>조회수</th>
+		</tr>
+	</thead>
  
  <tbody>
-  
+	<c:forEach items="${list}" var="list">
+		<tr>
+			<td>${list.board_no}</td>
+			<td>${list.board_title}</td>
+			<td>${list.board_writer}</td>
+			<td>${list.board_regDate}</td>
+			<td>${list.board_readCount}</td>
+		</tr>
+	</c:forEach>
  </tbody>
 
 </table>
