@@ -13,6 +13,8 @@ public class BoardDao {
 
 	public List<BoardDto> sel(){
 		return sqlSession.selectList("sql.sel");
-
+	}
+	public List<BoardDto> list(){
+		return sqlSession.selectList("sql.list");
 	}
 }

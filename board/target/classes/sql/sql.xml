@@ -5,4 +5,10 @@
 <select id="sel" resultType="com.board.controller.BoardDto">     <!-- resultType 본인 환경에 맞게 수정 필요 Dto class 위치 까지 표시 -->
 	SELECT * FROM board
 </select>
+<!-- 게시물 목록 -->
+<select id="list" resultType="com.board.controller.BoardDto">
+ select
+  BOARD_NO, BOARD_TITLE, BOARD__CONTENT, BOARD_WRITER, BOARD_READCOUNT, BOARD_REGDATE
+ from board
+</select>
 </mapper>
