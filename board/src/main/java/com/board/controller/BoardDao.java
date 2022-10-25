@@ -14,11 +14,18 @@ public class BoardDao {
 	public List<BoardDto> sel(){
 		return sqlSession.selectList("sql.sel");
 	}
+	// 게시물 목록
 	public List<BoardDto> list(){
 		return sqlSession.selectList("sql.list");
 	}
+	// 게시물 작성
 	public void write(BoardDto vo) throws Exception{
 		sqlSession.insert("sql.write", vo);
 
+	}
+	// 게시물 조회
+	public BoardDto view(int board_no) throws Exception {
+	 
+	 return sqlSession.selectOne("sql.view", board_no);
 	}
 }
