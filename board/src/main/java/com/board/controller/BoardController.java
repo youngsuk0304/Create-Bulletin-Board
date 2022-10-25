@@ -8,7 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Date;
 
 
 @Controller
@@ -16,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class BoardController {
 	@Inject
 	BoardDao service;
-	// ∞‘Ω√π∞ ∏Ò∑œ
+	// Í≤åÏãúÎ¨º Î™©Î°ù
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public void getList(Model model) throws Exception {
 		List list = null;
@@ -24,17 +26,27 @@ public class BoardController {
 		model.addAttribute("list", list);
  }
 	
-	// ∞‘Ω√π∞ ¿€º∫
+	// Í≤åÏãúÎ¨º ÏûëÏÑ±
 	@RequestMapping(value = "/write", method = RequestMethod.GET)
 	public void getWirte() throws Exception {
 	   
 	}
 	
-	// ∞‘Ω√π∞ ¿€º∫
+    Date now = new Date();
+    
 	@RequestMapping(value = "/write", method = RequestMethod.POST)
 	public String posttWirte(BoardDto vo) throws Exception {
-	  service.write(vo);
-	  
-	  return "redirect:/board/list";
+		vo.setBoard_regDate(now);
+		service.write(vo);
+		
+		return "redirect:/board/list";
+	}
+	
+	// Í≤åÏãúÎ¨º Ï°∞Ìöå
+	@RequestMapping(value = "/view", method = RequestMethod.GET)
+	public void getView(@RequestParam("board_no") int board_no, Model model) throws Exception {
+		BoardDto vo = service.view(board_no);
+		
+		model.addAttribute("view",vo);
 	}
 }
