@@ -25,8 +25,8 @@
 		<tr>
 			<td>${list.board_no}</td>
 			<td>${list.board_title}</td>
-			<td>${list.board_writer}</td>
 			<td>${list.board_regDate}</td>
+			<td>${list.board_writer}</td>
 			<td>${list.board_readCount}</td>
 		</tr>
 	</c:forEach>
