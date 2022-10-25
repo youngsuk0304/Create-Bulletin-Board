@@ -15,7 +15,7 @@
 <insert id="write" parameterType="com.board.controller.BoardDto">
  insert into
   board("BOARD_NO","BOARD_TITLE", "BOARD_CONTENT", "BOARD_WRITER","BOARD_REGDATE")
-   values(5,#{board_title}, #{board_content}, #{board_writer},#{board_regDate})
+   values(6,#{board_title}, #{board_content}, #{board_writer},#{board_regDate})
 </insert>
 <!-- 게시물 조회 -->
 <select id="view" parameterType="int" resultType="com.board.controller.BoardDto">
