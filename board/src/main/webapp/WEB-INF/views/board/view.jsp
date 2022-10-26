@@ -14,13 +14,13 @@
 	<form method="post">
 
 	<label>제목</label>
-	<input type="text" name="board_title" value="${view.board_title}"/><br />
+	${view.board_title}<br />
 	
 	<label>작성자</label>
-	<input type="text" name="board_writer" value="${view.board_writer}"/><br />
+	${view.board_writer}<br />
 	
-	<label>내용</label>
-	<textarea cols="50" rows="5" name="board_content">${view.board_content}</textarea><br />
+	<label>내용</label><br />
+	${view.board_content}<br />
 	<label name="board_regDate"><%= now %></label>
 	
 
