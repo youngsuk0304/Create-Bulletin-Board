@@ -49,4 +49,10 @@ public class BoardController {
 		
 		model.addAttribute("view",vo);
 	}
+	
+	// 게시물 수정
+	@RequestMapping(value = "/modify", method = RequestMethod.GET)
+	public void getModify() throws Exception {
+
+	}
 }
