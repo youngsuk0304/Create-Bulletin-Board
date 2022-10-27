@@ -25,5 +25,8 @@
 	
 
 	</form>
+	<div>
+		<a href="/board/modify?board_no=${view.board_no}">게시물 수정</a>
+	</div>
 </body>
 </html>
