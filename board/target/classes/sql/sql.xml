@@ -26,4 +26,15 @@
  where
   "BOARD_NO" = #{board_no}   
 </select>
+
+<!-- 게시물 수정 -->
+<update id="modify" parameterType="com.board.controller.BoardDto" >
+ update board
+  set
+   "BOARD_TITLE" = #{board_title},
+   "BOARD_CONTENT" = #{board_content},
+   "BOARD_WRITER"= #{board_writer}
+  where "BOARD_NO" = #{board_no}
+</update>
+
 </mapper>
