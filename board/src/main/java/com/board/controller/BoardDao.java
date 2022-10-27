@@ -28,4 +28,9 @@ public class BoardDao {
 	 
 	 return sqlSession.selectOne("sql.view", board_no);
 	}
+	
+	// 게시물 수정
+	public void modify(BoardDto vo) throws Exception {
+		sqlSession.update("sql.modify", vo);
+	}
 }
