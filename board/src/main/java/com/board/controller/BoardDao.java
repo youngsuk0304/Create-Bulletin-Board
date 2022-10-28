@@ -33,4 +33,10 @@ public class BoardDao {
 	public void modify(BoardDto vo) throws Exception {
 		sqlSession.update("sql.modify", vo);
 	}
+	
+	// 게시물 삭제
+	public void delete(int board_no) throws Exception {
+		sqlSession.delete("sql.delete", board_no);
+	}
+	
 }
