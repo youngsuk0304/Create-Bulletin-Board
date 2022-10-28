@@ -9,7 +9,7 @@
 <select id="list" resultType="com.board.controller.BoardDto">
  select
   "BOARD_NO", "BOARD_TITLE", "BOARD_CONTENT", "BOARD_WRITER", "BOARD_READCOUNT", "BOARD_REGDATE"
- from board order by "BOARD_NO"
+ from board order by "BOARD_NO" DESC
 </select>
 <!-- 게시물 작성 -->
 <insert id="write" parameterType="com.board.controller.BoardDto">
