@@ -1,5 +1,6 @@
 package com.board.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -39,4 +40,19 @@ public class BoardDao {
 		sqlSession.delete("sql.delete", board_no);
 	}
 	
+	// 게시물 총 갯수
+	public int count() throws Exception {
+	 return sqlSession.selectOne("sql.count"); 
+	}
+	
+	// 게시물 목록 + 페이징
+	public List listPage(int displayPost, int postNum) throws Exception {
+
+	 HashMap data = new HashMap();
+	  
+	 data.put("displayPost", displayPost);
+	 data.put("postNum", postNum);
+	  
+	 return sqlSession.selectList("sql.listPage", data);
+	}
 }

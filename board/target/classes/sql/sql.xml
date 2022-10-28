@@ -8,8 +8,8 @@
 <!-- 게시물 목록 -->
 <select id="list" resultType="com.board.controller.BoardDto">
  select
-  "BOARD_NO", "BOARD_TITLE", "BOARD_CONTENT", "BOARD_WRITER", "BOARD_READCOUNT", "BOARD_REGDATE"
- from board order by "BOARD_NO" DESC
+  "BOARD_NO", "BOARD_TITLE", "BOARD_WRITER", "BOARD_READCOUNT", "BOARD_REGDATE"
+ from board order by "BOARD_NO" DESC limit 10
 </select>
 <!-- 게시물 작성 -->
 <insert id="write" parameterType="com.board.controller.BoardDto">
@@ -43,5 +43,19 @@
   from board
  where "BOARD_NO" = #{board_no}
 </delete>
+
+<!-- 게시물 총 갯수 -->
+<select id="count" resultType="int">
+ select count("BOARD_NO") from board
+</select>
+
+<!-- 게시물 목록 + 페이징 -->
+<select id="listPage" parameterType="hashMap" resultType="com.board.controller.BoardDto">
+ select
+  "BOARD_NO", "BOARD_TITLE", "BOARD_WRITER", "BOARD_REGDATE", "BOARD_READCOUNT"
+ from board
+ order by "BOARD_NO" DESC
+  limit #{displayPost} OFFSET  #{postNum}
+</select>
 
 </mapper>
