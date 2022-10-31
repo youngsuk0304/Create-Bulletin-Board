@@ -9,7 +9,7 @@
 <select id="list" resultType="com.board.controller.BoardDto">
  select
   "BOARD_NO", "BOARD_TITLE", "BOARD_WRITER", "BOARD_READCOUNT", "BOARD_REGDATE"
- from board order by "BOARD_NO" DESC limit 10
+ from board order by "BOARD_NO" DESC
 </select>
 <!-- 게시물 작성 -->
 <insert id="write" parameterType="com.board.controller.BoardDto">
@@ -57,5 +57,11 @@
  order by "BOARD_NO" DESC
   limit #{displayPost} OFFSET  #{postNum}
 </select>
-
+<!-- 게시물 조회수 수정 -->
+<update id="readcount" parameterType="com.board.controller.BoardDto">
+	update board
+  set
+   "BOARD_READCOUNT" = "BOARD_READCOUNT"+1
+  where "BOARD_NO" = #{board_no}
+</update>
 </mapper>

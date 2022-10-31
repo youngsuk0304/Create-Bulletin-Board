@@ -17,8 +17,9 @@
 <P> board_content is ${board_content}</P>
 <P> board_writer is ${board_writer}</P>
 <p>
-<a href="/board/list">게시물 목록</a><br>
-<a href="/board/write">게시물 작성</a>
+<div id="nav">
+		<%@ include file="./include/nav.jsp" %>
+	</div>
 </p>
 
 </body>

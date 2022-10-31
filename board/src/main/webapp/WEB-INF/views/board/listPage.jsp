@@ -40,7 +40,6 @@
 		</tr>
 	</c:forEach>
  </tbody>
-
 </table>
 	<div>
 		<c:forEach begin="1" end="${pageNum}" var="num">

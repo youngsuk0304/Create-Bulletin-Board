@@ -55,4 +55,9 @@ public class BoardDao {
 	  
 	 return sqlSession.selectList("sql.listPage", data);
 	}
+	
+	// 게시물 조회수 수정
+	public void readcount(int board_no) throws Exception {
+		sqlSession.update("sql.readcount", board_no);
+	}
 }

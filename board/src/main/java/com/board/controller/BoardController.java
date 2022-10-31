@@ -46,8 +46,8 @@ public class BoardController {
 	@RequestMapping(value = "/view", method = RequestMethod.GET)
 	public void getView(@RequestParam("board_no") int board_no, Model model) throws Exception {
 		BoardDto vo = service.view(board_no);
-		
 		model.addAttribute("view",vo);
+		service.readcount(board_no);// /view로 시작되는 주소로 이동시 board_no으로 된 조회소 1증가
 	}
 	
 	// 게시물 수정
