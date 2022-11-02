@@ -8,16 +8,16 @@ public class Page {
 	private int count;
 
 	// 한 페이지에 출력할 게시물 갯수
-	private int postNum = 10;
+	private int displayPost = 5;
 
 	// 하단 페이징 번호 ([ 게시물 총 갯수 ÷ 한 페이지에 출력할 갯수 ]의 올림)
 	private int pageNum;
 
 	// 출력할 게시물
-	private int displayPost;
+	private int postNum;
 
 	// 한번에 표시할 페이징 번호의 갯수
-	private int pageNumCnt = 10;
+	private int pageNumCnt = 3;
 
 	// 표시되는 페이지 번호 중 마지막 번호
 	private int endPageNum;
@@ -39,6 +39,7 @@ public class Page {
 	}
 	public void setCount(int count) {
 		this.count = count;
+		dataCalc();
 	}
 	public int getPostNum() {
 		return postNum;
@@ -92,23 +93,26 @@ public class Page {
 	
 	private void dataCalc() {
 		 
-		 // 마지막 번호
-		 endPageNum = (int)(Math.ceil((double)num / (double)pageNumCnt) * pageNumCnt);
+		// 하단 페이징 번호 ([ 게시물 총 갯수 ÷ 한 페이지에 출력할 갯수 ]의 올림)
+		pageNum=(int)Math.ceil((double)count/displayPost);
+		
+		postNum = (num-1) * displayPost;
+		
+		// 마지막 번호
+		endPageNum = (int)(Math.ceil((double)num / (double)pageNumCnt) * pageNumCnt);
 		 
-		 // 시작 번호
-		 startPageNum = endPageNum - (pageNumCnt - 1);
+		// 시작 번호
+		startPageNum = endPageNum - (pageNumCnt - 1);
 		 
-		 // 마지막 번호 재계산
-		 int endPageNum_tmp = (int)(Math.ceil((double)count / (double)pageNumCnt));
+		// 마지막 번호 재계산
+		int endPageNum_tmp = (int)(Math.ceil((double)count / (double)pageNumCnt));
 		 
-		 if(endPageNum > endPageNum_tmp) {
-		  endPageNum = endPageNum_tmp;
-		 }
+		if(endPageNum > endPageNum_tmp) {
+			endPageNum = endPageNum_tmp;
+		}
 		 
-		 prev = startPageNum == 1 ? false : true;
-		 next = endPageNum * pageNumCnt >= count ? false : true;
-		 
-		 displayPost = (num - 1) * postNum;
+		prev = startPageNum == 1 ? false : true;
+		next = endPageNum * pageNumCnt >= count ? false : true;
 		 
 	}
 }
