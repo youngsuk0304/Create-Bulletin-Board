@@ -16,12 +16,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/board/*")
 public class BoardController {
 	@Inject
-	BoardDao service;
+	BoardDao dao;
 	// 게시물 목록
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	@RequestMapping(value = "/list", method = RequestMethod.GET)//value="/list"의 list는 list.jsp를 의미 
 	public void getList(Model model) throws Exception {
 		List list = null;
-		list = service.list();
+		list = dao.list();
 		model.addAttribute("list", list);
  }
 	
@@ -36,7 +36,7 @@ public class BoardController {
 	@RequestMapping(value = "/write", method = RequestMethod.POST)
 	public String posttWirte(BoardDto vo) throws Exception {
 		vo.setBoard_regDate(now);
-		service.write(vo);
+		dao.write(vo);
 		
 		return "redirect:/board/list";
 	}
@@ -44,16 +44,16 @@ public class BoardController {
 	// 게시물 조회
 	@RequestMapping(value = "/view", method = RequestMethod.GET)
 	public void getView(@RequestParam("board_no") int board_no, Model model) throws Exception {
-		BoardDto vo = service.view(board_no);
+		BoardDto vo = dao.view(board_no);
 		model.addAttribute("view",vo);
-		service.readcount(board_no);// /view로 시작되는 주소로 이동시 board_no으로 된 조회소 1증가
+		dao.readcount(board_no);// /view로 시작되는 주소로 이동시 board_no으로 된 조회소 1증가
 	}
 	
 	// 게시물 수정
 	@RequestMapping(value = "/modify", method = RequestMethod.GET)
 	public void getModify(@RequestParam("board_no") int board_no, Model model) throws Exception {
 
-	 BoardDto vo = service.view(board_no);
+	 BoardDto vo = dao.view(board_no);
 	   
 	 model.addAttribute("view", vo);
 	}
@@ -63,7 +63,7 @@ public class BoardController {
 	@RequestMapping(value = "/modify", method = RequestMethod.POST)
 	public String postModify(BoardDto vo) throws Exception {
 
-	 service.modify(vo);
+	 dao.modify(vo);
 	   
 	 return "redirect:/board/view?board_no=" + vo.getBoard_no();
 	}
@@ -72,7 +72,7 @@ public class BoardController {
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public String getDelete(@RequestParam("board_no") int board_no) throws Exception {
 	  
-	 service.delete(board_no);  
+	 dao.delete(board_no);  
 
 	 return "redirect:/board/list";
 	}
@@ -82,7 +82,7 @@ public class BoardController {
 	public void getListPage(Model model) throws Exception {
 	  
 		 List list = null; 
-		 list = service.list();
+		 list = dao.list();
 		 model.addAttribute("list", list);   
 	}
 	
@@ -92,10 +92,10 @@ public class BoardController {
 	
 		Page page=new Page();
 		page.setNum(num);
-		page.setCount(service.count());  
+		page.setCount(dao.count());  
 
 		List list = null; 
-		list = service.listPage(page.getDisplayPost(), page.getPostNum());
+		list = dao.listPage(page.getDisplayPost(), page.getPostNum());
 
 		model.addAttribute("list", list);   
 		model.addAttribute("pageNum", page.getPageNum());
@@ -185,7 +185,7 @@ public class BoardController {
 		Page page = new Page();
 		page.setNum(num);
 		//page.setCount(service.count());  
-		page.setCount(service.searchCount(searchType, keyword));
+		page.setCount(dao.searchCount(searchType, keyword));
 
 		// 검색 타입과 검색어
 		//page.setSearchTypeKeyword(searchType, keyword);
@@ -194,7 +194,7 @@ public class BoardController {
 		
 		List<BoardDto> list = null; 
 		//list = service.listPage(page.getDisplayPost(), page.getPostNum());
-		list = service.listPageSearch(page.getDisplayPost(), page.getPostNum(), searchType, keyword);
+		list = dao.listPageSearch(page.getDisplayPost(), page.getPostNum(), searchType, keyword);
 	 
 		model.addAttribute("list", list);
 		model.addAttribute("page", page);
