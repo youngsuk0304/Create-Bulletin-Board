@@ -57,6 +57,32 @@
  order by "BOARD_NO" DESC
   limit #{displayPost} OFFSET  #{postNum}
 </select>
+
+<!-- 게시물 목록 + 페이징 +검색 -->
+<select id="listPageSearch" parameterType="hashMap" resultType="com.board.controller.BoardDto">
+ select
+  "BOARD_NO", "BOARD_TITLE", "BOARD_WRITER", "BOARD_REGDATE", "BOARD_READCOUNT"
+ from board
+ <if test='searchType.equals("title")'>
+  WHERE "BOARD_TITLE" LIKE concat('%', #{keyword}, '%')
+ </if>
+ 
+ <if test='searchType.equals("content")'>
+  WHERE "BOARD_CONTENT" LIKE concat('%', #{keyword}, '%')
+ </if>
+ 
+ <if test='searchType.equals("title_content")'>
+  WHERE "BOARD_TITLE" LIKE concat('%', #{keyword}, '%') 
+   or "BOARD_CONTENT" LIKE concat('%', #{keyword}, '%')
+ </if>
+ 
+ <if test='searchType.equals("writer")'>
+  WHERE "BOARD_WRITER" LIKE concat('%', #{keyword}, '%')
+ </if>
+ order by "BOARD_NO" DESC
+  limit #{displayPost} OFFSET  #{postNum}
+</select>
+
 <!-- 게시물 조회수 수정 -->
 <update id="readcount" parameterType="com.board.controller.BoardDto">
 	update board
