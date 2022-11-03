@@ -1,7 +1,7 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 <html>
@@ -11,40 +11,38 @@
 </head>
 <body>
 	<div id="nav">
-		<%@ include file="../include/nav.jsp" %>
+		<%@ include file="../include/nav.jsp"%>
 	</div>
 	<table>
-	<thead>
-		<tr>
-			<th>번호</th>
-			<th>제목</th>
-			<th>작성일</th>
-			<th>작성자</th>
-			<th>조회수</th>
-		</tr>
-	</thead>
- 
- <tbody>
- 	
-	<c:forEach items="${list}" var="list" varStatus="status"  >
-		<tr>
-		
-			<%-- <td>${list.board_no}</td>--%>
-			<td>${status.count}</td>
-			<td>
-			    <a href="/board/view?board_no=${list.board_no}">${list.board_title}</a>
-			</td>
-			<td>
-				<fmt:formatDate value="${list.board_regDate}" pattern="yyyy-MM-dd" />
-			</td>
-			
-			<td>${list.board_writer}</td>
-			<td>${list.board_readCount}</td>
-		</tr>
-	</c:forEach>
- </tbody>
+		<thead>
+			<tr>
+				<th>번호</th>
+				<th>제목</th>
+				<th>작성일</th>
+				<th>작성자</th>
+				<th>조회수</th>
+			</tr>
+		</thead>
 
-</table>
-	
+		<tbody>
+
+			<c:forEach items="${list}" var="list" varStatus="status">
+				<tr>
+
+					<%-- <td>${list.board_no}</td>--%>
+					<td>${status.count}</td>
+					<td><a href="/board/view?board_no=${list.board_no}">${list.board_title}</a>
+					</td>
+					<td><fmt:formatDate value="${list.board_regDate}"
+							pattern="yyyy-MM-dd" /></td>
+
+					<td>${list.board_writer}</td>
+					<td>${list.board_readCount}</td>
+				</tr>
+			</c:forEach>
+		</tbody>
+
+	</table>
+
 </body>
 </html>

@@ -2,115 +2,123 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="sql">
-<select id="sel" resultType="com.board.controller.BoardDto">     <!-- resultType 본인 환경에 맞게 수정 필요 Dto class 위치 까지 표시 -->
-	SELECT * FROM board
-</select>
-<!-- 게시물 목록 -->
-<select id="list" resultType="com.board.controller.BoardDto">
- select
-  "BOARD_NO", "BOARD_TITLE", "BOARD_WRITER", "BOARD_READCOUNT", "BOARD_REGDATE"
- from board order by "BOARD_NO" DESC
-</select>
-<!-- 게시물 작성 -->
-<insert id="write" parameterType="com.board.controller.BoardDto">
- insert into
-  board("BOARD_NO","BOARD_TITLE", "BOARD_CONTENT", "BOARD_WRITER","BOARD_REGDATE")
-   values(DEFAULT,#{board_title}, #{board_content}, #{board_writer},#{board_regDate})
-</insert>
-<!-- 게시물 조회 -->
-<select id="view" parameterType="int" resultType="com.board.controller.BoardDto">
- select 
-  "BOARD_NO", "BOARD_TITLE", "BOARD_CONTENT", "BOARD_WRITER", "BOARD_REGDATE", "BOARD_READCOUNT"
- from 
-  board
- where
-  "BOARD_NO" = #{board_no}   
-</select>
+	<select id="sel" resultType="com.board.controller.BoardDto">     <!-- resultType 본인 환경에 맞게 수정 필요 Dto class 위치 까지 표시 -->
+		SELECT * FROM board
+	</select>
+	<!-- 게시물 목록 -->
+	<select id="list" resultType="com.board.controller.BoardDto">
+		select
+		"BOARD_NO", "BOARD_TITLE", "BOARD_WRITER", "BOARD_READCOUNT", "BOARD_REGDATE"
+		from board order by "BOARD_NO" DESC
+	</select>
+	<!-- 게시물 작성 -->
+	<insert id="write" parameterType="com.board.controller.BoardDto">
+		insert into
+		board("BOARD_NO","BOARD_TITLE", "BOARD_CONTENT", "BOARD_WRITER","BOARD_REGDATE")
+		values(DEFAULT,#{board_title}, #{board_content},
+		#{board_writer},#{board_regDate})
+	</insert>
+	<!-- 게시물 조회 -->
+	<select id="view" parameterType="int"
+		resultType="com.board.controller.BoardDto">
+		select
+		"BOARD_NO", "BOARD_TITLE", "BOARD_CONTENT", "BOARD_WRITER", "BOARD_REGDATE",
+		"BOARD_READCOUNT"
+		from
+		board
+		where
+		"BOARD_NO" = #{board_no}
+	</select>
 
-<!-- 게시물 수정 -->
-<update id="modify" parameterType="com.board.controller.BoardDto" >
- update board
-  set
-   "BOARD_TITLE" = #{board_title},
-   "BOARD_CONTENT" = #{board_content},
-   "BOARD_WRITER"= #{board_writer}
-  where "BOARD_NO" = #{board_no}
-</update>
+	<!-- 게시물 수정 -->
+	<update id="modify"
+		parameterType="com.board.controller.BoardDto">
+		update board
+		set
+		"BOARD_TITLE" = #{board_title},
+		"BOARD_CONTENT" = #{board_content},
+		"BOARD_WRITER"= #{board_writer}
+		where "BOARD_NO" = #{board_no}
+	</update>
 
-<!-- 게시물 삭제 -->
-<delete id="delete" parameterType="int">
- delete
-  from board
- where "BOARD_NO" = #{board_no}
-</delete>
+	<!-- 게시물 삭제 -->
+	<delete id="delete" parameterType="int">
+		delete
+		from board
+		where "BOARD_NO" = #{board_no}
+	</delete>
 
-<!-- 게시물 총 갯수 -->
-<select id="count" resultType="int">
- select count("BOARD_NO") from board
-</select>
+	<!-- 게시물 총 갯수 -->
+	<select id="count" resultType="int">
+		select count("BOARD_NO") from board
+	</select>
 
-<!-- 게시물 목록 + 페이징 -->
-<select id="listPage" parameterType="hashMap" resultType="com.board.controller.BoardDto">
- select
-  "BOARD_NO", "BOARD_TITLE", "BOARD_WRITER", "BOARD_REGDATE", "BOARD_READCOUNT"
- from board
- order by "BOARD_NO" DESC
-  limit #{displayPost} OFFSET  #{postNum}
-</select>
+	<!-- 게시물 목록 + 페이징 -->
+	<select id="listPage" parameterType="hashMap"
+		resultType="com.board.controller.BoardDto">
+		select
+		"BOARD_NO", "BOARD_TITLE", "BOARD_WRITER", "BOARD_REGDATE", "BOARD_READCOUNT"
+		from board
+		order by "BOARD_NO" DESC
+		limit #{displayPost} OFFSET #{postNum}
+	</select>
 
-<!-- 게시물 목록 + 페이징 +검색 -->
-<select id="listPageSearch" parameterType="hashMap" resultType="com.board.controller.BoardDto">
- select
-  "BOARD_NO", "BOARD_TITLE", "BOARD_WRITER", "BOARD_REGDATE", "BOARD_READCOUNT"
- from board
- <if test='searchType.equals("title")'>
-  WHERE "BOARD_TITLE" LIKE concat('%', #{keyword}, '%')
- </if>
- 
- <if test='searchType.equals("content")'>
-  WHERE "BOARD_CONTENT" LIKE concat('%', #{keyword}, '%')
- </if>
- 
- <if test='searchType.equals("title_content")'>
-  WHERE "BOARD_TITLE" LIKE concat('%', #{keyword}, '%') 
-   or "BOARD_CONTENT" LIKE concat('%', #{keyword}, '%')
- </if>
- 
- <if test='searchType.equals("writer")'>
-  WHERE "BOARD_WRITER" LIKE concat('%', #{keyword}, '%')
- </if>
- order by "BOARD_NO" DESC
-  limit #{displayPost} OFFSET  #{postNum}
-</select>
+	<!-- 게시물 목록 + 페이징 +검색 -->
+	<select id="listPageSearch" parameterType="hashMap"
+		resultType="com.board.controller.BoardDto">
+		select
+		"BOARD_NO", "BOARD_TITLE", "BOARD_WRITER", "BOARD_REGDATE", "BOARD_READCOUNT"
+		from board
+		<if test='searchType.equals("title")'>
+			WHERE "BOARD_TITLE" LIKE concat('%', #{keyword}, '%')
+		</if>
 
-<!-- 게시물 조회수 수정 -->
-<update id="readcount" parameterType="com.board.controller.BoardDto">
-	update board
-  set
-   "BOARD_READCOUNT" = "BOARD_READCOUNT"+1
-  where "BOARD_NO" = #{board_no}
-</update>
+		<if test='searchType.equals("content")'>
+			WHERE "BOARD_CONTENT" LIKE concat('%', #{keyword}, '%')
+		</if>
 
-<!-- 게시물 총 갯수 + 검색 적용 -->
-<select id="searchCount" parameterType="hashMap" resultType="int">
- select count("BOARD_NO") from board  
-  
- <if test='searchType.equals("title")'>
-  WHERE "BOARD_TITLE" LIKE concat('%', #{keyword}, '%')
- </if>
- 
- <if test='searchType.equals("content")'>
-  WHERE "BOARD_CONTENT" LIKE concat('%', #{keyword}, '%')
- </if>
- 
- <if test='searchType.equals("title_content")'>
-  WHERE "BOARD_TITLE" LIKE concat('%', #{keyword}, '%') 
-   or "BOARD_CONTENT" LIKE concat('%', #{keyword}, '%')
- </if>
- 
- <if test='searchType.equals("writer")'>
-  WHERE "BOARD_WRITER" LIKE concat('%', #{keyword}, '%')
- </if>
- 
-</select>
+		<if test='searchType.equals("title_content")'>
+			WHERE "BOARD_TITLE" LIKE concat('%', #{keyword}, '%')
+			or "BOARD_CONTENT" LIKE concat('%', #{keyword}, '%')
+		</if>
+
+		<if test='searchType.equals("writer")'>
+			WHERE "BOARD_WRITER" LIKE concat('%', #{keyword}, '%')
+		</if>
+		order by "BOARD_NO" DESC
+		limit #{displayPost} OFFSET #{postNum}
+	</select>
+
+	<!-- 게시물 조회수 수정 -->
+	<update id="readcount"
+		parameterType="com.board.controller.BoardDto">
+		update board
+		set
+		"BOARD_READCOUNT" = "BOARD_READCOUNT"+1
+		where "BOARD_NO" = #{board_no}
+	</update>
+
+	<!-- 게시물 총 갯수 + 검색 적용 -->
+	<select id="searchCount" parameterType="hashMap"
+		resultType="int">
+		select count("BOARD_NO") from board
+
+		<if test='searchType.equals("title")'>
+			WHERE "BOARD_TITLE" LIKE concat('%', #{keyword}, '%')
+		</if>
+
+		<if test='searchType.equals("content")'>
+			WHERE "BOARD_CONTENT" LIKE concat('%', #{keyword}, '%')
+		</if>
+
+		<if test='searchType.equals("title_content")'>
+			WHERE "BOARD_TITLE" LIKE concat('%', #{keyword}, '%')
+			or "BOARD_CONTENT" LIKE concat('%', #{keyword}, '%')
+		</if>
+
+		<if test='searchType.equals("writer")'>
+			WHERE "BOARD_WRITER" LIKE concat('%', #{keyword}, '%')
+		</if>
+
+	</select>
 </mapper>
