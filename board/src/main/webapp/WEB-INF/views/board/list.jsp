@@ -25,9 +25,12 @@
 	</thead>
  
  <tbody>
-	<c:forEach items="${list}" var="list">
+ 	
+	<c:forEach items="${list}" var="list" varStatus="status"  >
 		<tr>
-			<td>${list.board_no}</td>
+		
+			<%-- <td>${list.board_no}</td>--%>
+			<td>${status.count}</td>
 			<td>
 			    <a href="/board/view?board_no=${list.board_no}">${list.board_title}</a>
 			</td>
