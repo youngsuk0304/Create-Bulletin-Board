@@ -156,4 +156,51 @@ public class BoardController {
 //	// 현재 페이지
 //	 model.addAttribute("select", num);
 	}
+//	// 게시물 목록 + 페이징 추가 + 검색
+//	@RequestMapping(value = "/listPageSearch", method = RequestMethod.GET)
+//	public void getListPageSearch(Model model, @RequestParam("num") int num) throws Exception {
+//	
+//		Page page=new Page();
+//		page.setNum(num);
+//		page.setCount(service.count());  
+//
+//		List list = null; 
+//		list = service.listPage(page.getDisplayPost(), page.getPostNum());
+//
+//		model.addAttribute("list", list);   
+//		model.addAttribute("pageNum", page.getPageNum());
+//
+//		model.addAttribute("page", page);
+//
+//		model.addAttribute("select", num);
+//	}
+	
+	// 게시물 목록 + 페이징 추가 + 검색
+	@RequestMapping(value = "/listPageSearch", method = RequestMethod.GET)
+	public void getListPageSearch(Model model, @RequestParam("num") int num, 
+			@RequestParam(value="searchType",required=false,defaultValue="title") String searchType,
+			@RequestParam(value="keyword",required=false,defaultValue="")String keyword
+			) throws Exception {
+		//value 받고자할 데이터의 키, required는 해당 데이터의 필수여부, defaultValue는 데이터가 들어오지 않을경우의 기본값
+		Page page = new Page();
+		page.setNum(num);
+		//page.setCount(service.count());  
+		page.setCount(service.searchCount(searchType, keyword));
+
+		// 검색 타입과 검색어
+		//page.setSearchTypeKeyword(searchType, keyword);
+		page.setSearchType(searchType);
+		page.setKeyword(keyword);
+		
+		List<BoardDto> list = null; 
+		//list = service.listPage(page.getDisplayPost(), page.getPostNum());
+		list = service.listPageSearch(page.getDisplayPost(), page.getPostNum(), searchType, keyword);
+	 
+		model.addAttribute("list", list);
+		model.addAttribute("page", page);
+		model.addAttribute("select", num);
+		
+//		model.addAttribute("searchType", searchType);
+//		model.addAttribute("keyword", keyword);
+	}
 }
