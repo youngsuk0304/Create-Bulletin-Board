@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Date;
+
 @Controller
 @RequestMapping("/board/*")
 public class BoardController {
@@ -35,7 +37,9 @@ public class BoardController {
 
 	@RequestMapping(value = "/write", method = RequestMethod.POST)
 	public String posttWirte(BoardDto vo) throws Exception {
+		Date now=new Date();
 		vo.setBoard_regDate(now);
+		//vo.setBoard_regDate(now);
 		dao.write(vo);
 
 		return "redirect:/board/list";

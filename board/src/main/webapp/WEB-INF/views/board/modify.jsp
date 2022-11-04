@@ -2,8 +2,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.Date"%>
+<%@ page import="java.text.SimpleDateFormat" %>
 <%
 Date now = new Date();
+SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+String strNowDate=simpleDateFormat.format(now);
 %>
 <!DOCTYPE html>
 <html>
@@ -17,13 +20,15 @@ Date now = new Date();
 	</div>
 	<form method="post">
 
-		<label>제목</label> <input type="text" name="board_title"
-			value="${view.board_title}" /><br /> <label>작성자</label> <input
-			type="text" name="board_writer" value="${view.board_writer}" /><br />
-
+		<label>제목</label> 
+		<input type="text" name="board_title" value="${view.board_title}" /><br /> 
+		
+		<label>작성자</label> 
+		<input type="text" name="board_writer" value="${view.board_writer}" /><br />
+		
 		<label>내용</label>
-		<textarea cols="50" rows="5" name="board_content">${view.board_content}</textarea>
-		<br /> <label name="board_regDate"><%=now%></label>
+		<textarea cols="50" rows="5" name="board_content">${view.board_content}</textarea><br /> 
+		<label name="board_regDate"><%=strNowDate%></label>
 
 		<button type="submit">완료</button>
 

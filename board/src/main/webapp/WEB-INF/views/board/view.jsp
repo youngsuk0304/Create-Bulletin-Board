@@ -4,7 +4,6 @@
 <%@ page import="java.util.Date"%>
 <%
 	Date now = new Date();
-	int count;
 %>
 <!DOCTYPE html>
 <html>
@@ -18,14 +17,21 @@
 	</div>
 	<form method="post">
 
-		<label>제목</label> ${view.board_title}<br /> <label>작성자</label>
-		${view.board_writer}<br /> <label>내용</label><br />
-		${view.board_content}<br /> <label name="board_regDate"><%= now %></label>
+		<label>제목</label> 
+		${view.board_title}<br /> 
+		
+		<label>작성자</label> 
+		${view.board_writer}<br /> 
+		
+		<label>내용</label><br />
+		${view.board_content}<br />
+		 
+		<label name="board_regDate"><%= now %></label>
 
 	</form>
 	<div>
-		<a href="/board/modify?board_no=${view.board_no}">게시물 수정</a>,<a
-			href="/board/delete?board_no=${view.board_no}">게시물 삭제</a>
+		<a href="/board/modify?board_no=${view.board_no}">게시물 수정</a>,
+		<a href="/board/delete?board_no=${view.board_no}">게시물 삭제</a>
 
 	</div>
 

@@ -17,11 +17,15 @@
 	</div>
 	<form method="post">
 
-		<label>제목</label> <input type="text" name="board_title" /><br /> <label>작성자</label>
-		<input type="text" name="board_writer" /><br /> <label>내용</label>
-		<textarea cols="50" rows="5" name="board_content"></textarea>
-		<br /> <label name="board_regDate"><%= now %></label>
-
+		<label>제목</label> 
+		<input type="text" name="board_title" /><br /> 
+		
+		<label>작성자</label>
+		<input type="text" name="board_writer" /><br /> 
+		
+		<label>내용</label>
+		<textarea cols="50" rows="5" name="board_content"></textarea><br /> 
+		
 		<button type="submit">작성</button>
 
 	</form>
