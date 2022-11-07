@@ -33,7 +33,7 @@
 					<td>${status.count}</td>
 					<td><a href="/board/view?board_no=${list.board_no}">${list.board_title}</a>
 					</td>
-					<td><fmt:formatDate value="${list.board_regDate}"pattern="yyyy-MM-dd" /></td>
+					<td><fmt:formatDate value="${list.board_regDate}" pattern="yyyy-MM-dd" /></td>
 					<td>${list.board_writer}</td>
 					<td>${list.board_readCount}</td>
 				</tr>
