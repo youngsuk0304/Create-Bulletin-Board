@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="replySql">
+	<!-- 댓글 조회 -->
+	<select id="replyList" parameterType="int" resultType="com.board.controller.BoardReDto">
+		select
+		"RE_NO", "BRD_NO", "RE_WRITER", "RE_CONTENT",
+		"RE_REGDATE"
+		from BOARD_RE
+		where "BRD_NO" = #{brd_no}
+	</select>
+
+	<!-- 댓글 작성 -->
+	<insert id="replyWrite" parameterType="com.board.controller.BoardReDto">
+		insert into BOARD_RE("BRD_NO", "RE_WRITER", ""RE_CONTENT", "RE_REGDATE")
+		value(#{brd_no}, #{re_writer},
+		#{re_content}, #{re_regDate})
+	</insert>
+
+	<!-- 댓글 수정 -->
+	<update id="replyModify" parameterType="com.board.controller.BoardReDto">
+		update BOARD_RE set
+		"RE_WRITER" = #{re_writer},
+		"RE_CONTENT" = #{re_content}
+		where "RE_NO" = #{re_no}
+		and "BRD_NO" = #{brd_no}
+	</update>
+
+	<!-- 댓글 삭제 -->
+	<delete id="replyDelete" parameterType="com.board.controller.BoardReDto">
+		delete from BOARD_RE
+		where "RE_NO" = #{re_no}
+		and "BRD_NO" = ${brd_no}
+	</delete>
+</mapper>
