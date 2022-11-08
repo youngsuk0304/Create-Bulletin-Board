@@ -13,9 +13,8 @@
 
 	<!-- 댓글 작성 -->
 	<insert id="replyWrite" parameterType="com.board.controller.BoardReDto">
-		insert into BOARD_RE("BRD_NO", "RE_WRITER", ""RE_CONTENT", "RE_REGDATE")
-		value(#{brd_no}, #{re_writer},
-		#{re_content}, #{re_regDate})
+		insert into BOARD_RE("BRD_NO","RE_NO" ,"RE_WRITER", "RE_CONTENT", "RE_REGDATE")
+		values(#{brd_no}, 2 ,#{re_writer}, #{re_content}, #{re_regDate})
 	</insert>
 
 	<!-- 댓글 수정 -->
