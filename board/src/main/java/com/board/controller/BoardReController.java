@@ -33,5 +33,13 @@ public class BoardReController {
 		model.addAttribute("reply",reply);
 	}
 
+	// 댓글 작성
+	@RequestMapping(value = "/write", method = RequestMethod.POST)
+	public String posttWirte(BoardReDto vo) throws Exception {
+		
+		redao.write(vo);
+		
+		return "redirect:/board/view?bno=" + vo.getBrd_no();
+	}
 	
 }
